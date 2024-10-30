@@ -1,5 +1,6 @@
 from cards import Deck, Card
 from player import Player
+import const
 
 
 class Round:
@@ -29,6 +30,7 @@ class Round:
                 self.players[idx].take_card(card)
 
     def show_down(self, current_player_idx: int):
+        print(const.separation_line)
         caller_score = self.players[current_player_idx].value_of_cards()
         print(f"{self.players[current_player_idx].name} called \033[1m SHOW \033[0m of cards, "
               f"with a score of {caller_score} points")
@@ -55,7 +57,7 @@ class Round:
 
     def pick_a_card(self, current_player_idx):
         print(f"Since you changed the number, you have to pick card(s): \n"
-              f"1. Last player's {len(self.card_stack[-1])} {self.card_stack[-1][0].value.value}(s), or \n"
+              f"1. Last card(s) in the centre {len(self.card_stack[-1])} {self.card_stack[-1][0].value.value}(s), or \n"
               f"2. One card from the top of the Deck")
         while True:
             choice = input()
@@ -98,7 +100,7 @@ class Round:
         return self.players[current_player_idx].play_card(chance), chance
 
     def player_turn(self, current_player_idx):
-        print('_'*60)
+        print(const.separation_line)
         print(f"{self.players[current_player_idx].name}'s turn!")
         self.players[current_player_idx].show_in_hand_cards()
 

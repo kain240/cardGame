@@ -1,6 +1,8 @@
 class ScoreBoard:
-    def __init__(self, players: list[str]):
+    def __init__(self, players: list[str], score_limit: int):
         self.board: dict[str:int] = {}
+        self.players = players
+        self.score_limit = score_limit
         for player in players:
             self.board[player] = 0
 
@@ -14,3 +16,14 @@ class ScoreBoard:
     def publish(self):
         print("the aggregate score of all rounds so far:")
         print(self)
+
+    def eliminations(self, players):
+        remaining_players = []
+        for player in players:
+            player_score = self.board[player]
+            if player_score < self.score_limit:
+                remaining_players.append(player)
+            else:
+                print(f"{player} got eliminated with a score of {player_score} points")
+
+        return remaining_players

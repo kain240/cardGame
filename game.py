@@ -1,14 +1,16 @@
-from player import Player
 from round import Round
 from scoreBoard import ScoreBoard
+import const
 
 
 class Game:
     def __init__(self, points=100):
+        print(const.separation_line)
         print(f"starting a game of {points} points...")
         self.round_number = 0
         self.players: list[str] = []
         self.score_board: ScoreBoard = None
+        self.score_limit = points
 
     def add_players(self, players: list[str]):
         print("Players in the game: ")
@@ -16,16 +18,21 @@ class Game:
             print(f"Player{idx}: {players[idx]}")
         self.players = players
 
-        self.score_board = ScoreBoard(players=self.players)
+        self.score_board = ScoreBoard(players=self.players, limit=self.score_limit)
 
     def update_scoreboard(self, scores):
+        print(const.separation_line)
         print("result of this round:")
         print(str(scores))
         self.score_board.update_scores(scores)
         self.score_board.publish()
 
+    def evaluate_game(self):
+        print(const.separation_line)
+        self.players = self.score_board.eliminations(self.players)
+
     def controller(self, **kwargs):
-        # todo: remove player as they hit score
+        print(const.separation_line)
         while len(self.players) > 1:
             self.round_number += 1
             input(f"press \'enter\' to start round{self.round_number}?")
@@ -37,8 +44,9 @@ class Game:
 
             new_round.controller(**kwargs)
 
-            results = new_round.result
-            self.update_scoreboard(results)
+            self.update_scoreboard(new_round.result)
+
+            self.evaluate_game()
 
         print("Game Over!!!")
         print(f'{self.players[0]} won')
