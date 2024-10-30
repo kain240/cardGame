@@ -3,15 +3,20 @@ from player import Player
 
 
 class Round:
-    def __init__(self, players, round_number):
+    def __init__(self, round_number):
         self.round_number = round_number
         print(f"Round {self.round_number}...")
-        self.players: list[Player] = players
-        self.total_players = len(players)
+        self.players: list[Player] = []
+        self.total_players = 0
         self.deck = Deck()
         self.card_stack: list[list[Card]] = []
         self.round_over = False
         self.result: dict = {}
+
+    def add_players(self, players: list[str]):
+        for player in players:
+            self.players.append(Player(player))
+        self.total_players = len(players)
 
     def distribute_cards(self, num_of_cards):
         if num_of_cards*len(self.players) > 49:
@@ -60,9 +65,12 @@ class Round:
                 print("invalid choice; please retry")
 
         if choice == "1":
-            top_cards = self.card_stack.pop(0)
+            top_cards = self.card_stack.pop(-1)
+            print(f"picked card(s):", end=' ')
             for card in top_cards:
                 self.players[current_player_idx].take_card(card)
+                print(card, end=' ')
+            print()
 
         if choice == "2":
             if self.deck.is_empty():
@@ -90,6 +98,7 @@ class Round:
         return self.players[current_player_idx].play_card(chance), chance
 
     def player_turn(self, current_player_idx):
+        print('_'*60)
         print(f"{self.players[current_player_idx].name}'s turn!")
         self.players[current_player_idx].show_in_hand_cards()
 

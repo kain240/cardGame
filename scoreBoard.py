@@ -1,11 +1,8 @@
-from player import Player
-
-
 class ScoreBoard:
-    def __init__(self, players: list[Player]):
+    def __init__(self, players: list[str]):
         self.board: dict[str:int] = {}
         for player in players:
-            self.board[player.name] = 0
+            self.board[player] = 0
 
     def __str__(self):
         return str(self.board)
