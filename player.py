@@ -24,6 +24,7 @@ class Player:
 
     def take_card(self, card: cards.Card) -> None:
         self.cards.append(card)
+        self.cards.sort(key=lambda card: card.value.value)
 
     def is_valid_play(self, chance:str):
         if chance == "SHOW":

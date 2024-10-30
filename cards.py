@@ -66,6 +66,11 @@ class Deck:
                 for card in cards:
                     self.cards.append(card)
 
+    def restore(self, card_stack: list[list[Card]]):
+        for cards in card_stack:
+            for card in cards:
+                self.cards.append(card)
+
     def shuffle(self):
         shuffled_deck = []
         for idx in range(self.size()):
@@ -77,7 +82,10 @@ class Deck:
     def size(self):
         return len(self.cards)
 
+    def is_empty(self):
+        return self.size() == 0
+
     def pop_a_card(self) -> Card:
-        card = self.cards[0]
-        self.cards.pop(0)
-        return card
+        if self.is_empty():
+            raise Exception("deck is empty")
+        return self.cards.pop(0)

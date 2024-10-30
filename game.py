@@ -21,17 +21,19 @@ class Game:
         self.score_board = ScoreBoard(players=self.players)
 
     def update_scoreboard(self, scores):
+        print("result of this round:")
+        print(str(scores))
         self.score_board.update_scores(scores)
-
-    def evaluate_game(self):
         self.score_board.publish()
-        pass
 
     def controller(self, **kwargs):
+        # todo: remove player as they hit score
         while len(self.players) > 1:
             self.round_number += 1
+            input(f"press any key to start round{self.round_number}?")
+
             new_round = Round(
-                players=self.players,
+                players=self.players.copy(),
                 round_number=self.round_number
             )
 
@@ -39,8 +41,6 @@ class Game:
 
             results = new_round.result
             self.update_scoreboard(results)
-
-            self.evaluate_game()
 
         print("Game Over!!!")
         print(f'{self.players[0].name} won')
