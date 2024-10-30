@@ -27,6 +27,9 @@ class Player:
         self.cards.sort(key=lambda card: card.value.value)
 
     def is_valid_play(self, chance:str):
+        if chance == '':
+            return False
+
         if chance == "SHOW":
             return self.value_of_cards() <= 10
 

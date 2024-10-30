@@ -123,6 +123,7 @@ class Round:
     def controller(self, **kwargs):
         self.deck.shuffle()
         self.distribute_cards(kwargs.get('num_of_cards', 7))
+        # todo: add zero card
         self.starting_card()
 
         current_player_idx = self.starting_player()

@@ -18,7 +18,7 @@ class Game:
             print(f"Player{idx}: {players[idx]}")
         self.players = players
 
-        self.score_board = ScoreBoard(players=self.players, limit=self.score_limit)
+        self.score_board = ScoreBoard(players=self.players, score_limit=self.score_limit)
 
     def update_scoreboard(self, scores):
         print(const.separation_line)
