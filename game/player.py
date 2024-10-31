@@ -1,5 +1,5 @@
 import uuid
-import cards
+from . import cards
 
 
 class Player:

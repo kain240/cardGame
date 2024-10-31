@@ -1,7 +1,6 @@
-from cards import Deck, Card
-from player import Player
-import const
-
+from .cards import Deck, Card
+from .player import Player
+from . import const
 
 class Round:
     def __init__(self, round_number):
