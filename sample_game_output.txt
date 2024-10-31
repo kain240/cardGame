@@ -1,0 +1,155 @@
+____________________________________________________________
+starting a game of 50 points...
+Players in the game:
+Player0: Vaibhav
+Player1: Khushi
+____________________________________________________________
+press 'enter' to start round1?
+Round 1...
+distributing 3 cards to each player...
+zero card is ♦️8
+all 8s will be considered as value zero(0) for this round
+starting card is ♥️5
+____________________________________________________________
+Vaibhav's turn!
+♦️3 ♣️6 ♦️6
+enter card to play (A/2-9/J/Q/K) or 'show':
+6
+Vaibhav played 2 6(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 5(s), or
+2. One card from the top of the Deck
+2
+picked card is ♦️Q
+____________________________________________________________
+Khushi's turn!
+♣️A ♠️A ♦️2
+enter card to play (A/2-9/J/Q/K) or 'show':
+show
+____________________________________________________________
+Khushi called  SHOW  of cards, with a score of 4 points
+Khushi won the round!!
+____________________________________________________________
+result of this round:
+{'Vaibhav': 13, 'Khushi': 0}
+the aggregate score of all rounds so far:
+{'Vaibhav': 13, 'Khushi': 0}
+____________________________________________________________
+press 'enter' to start round2?
+Round 2...
+distributing 3 cards to each player...
+zero card is ♥️4
+all 4s will be considered as value zero(0) for this round
+starting card is ♥️K
+____________________________________________________________
+Khushi's turn!
+♦️4 ♦️5 ♦️9
+enter card to play (A/2-9/J/Q/K) or 'show':
+9
+Khushi played 1 9(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 K(s), or
+2. One card from the top of the Deck
+2
+picked card is ♠️9
+____________________________________________________________
+Vaibhav's turn!
+♥️3 ♥️6 ♣️6
+enter card to play (A/2-9/J/Q/K) or 'show':
+6
+Vaibhav played 2 6(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 9(s), or
+2. One card from the top of the Deck
+1
+picked card(s): ♦️9
+____________________________________________________________
+Khushi's turn!
+♦️4 ♦️5 ♠️9
+enter card to play (A/2-9/J/Q/K) or 'show':
+9
+Khushi played 1 9(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 2 6(s), or
+2. One card from the top of the Deck
+2
+picked card is ♥️7
+____________________________________________________________
+Vaibhav's turn!
+♥️3 ♦️9
+enter card to play (A/2-9/J/Q/K) or 'show':
+9
+Vaibhav played 1 9(s)
+____________________________________________________________
+Khushi's turn!
+♦️4 ♦️5 ♥️7
+enter card to play (A/2-9/J/Q/K) or 'show':
+7
+Khushi played 1 7(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 9(s), or
+2. One card from the top of the Deck
+2
+picked card is ♠️4
+____________________________________________________________
+Vaibhav's turn!
+♥️3
+enter card to play (A/2-9/J/Q/K) or 'show':
+3
+Vaibhav played 1 3(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 7(s), or
+2. One card from the top of the Deck
+2
+picked card is ♦️3
+____________________________________________________________
+Khushi's turn!
+♦️4 ♠️4 ♦️5
+enter card to play (A/2-9/J/Q/K) or 'show':
+4
+Khushi played 2 4(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 3(s), or
+2. One card from the top of the Deck
+1
+picked card(s): ♥️3
+____________________________________________________________
+Vaibhav's turn!
+♦️3
+enter card to play (A/2-9/J/Q/K) or 'show':
+3
+Vaibhav played 1 3(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 2 4(s), or
+2. One card from the top of the Deck
+2
+picked card is ♠️T
+____________________________________________________________
+Khushi's turn!
+♥️3 ♦️5
+enter card to play (A/2-9/J/Q/K) or 'show':
+5
+Khushi played 1 5(s)
+Since you changed the number, you have to pick card(s):
+1. Top card(s) in the centre 1 3(s), or
+2. One card from the top of the Deck
+1
+picked card(s): ♦️3
+____________________________________________________________
+Vaibhav's turn!
+♠️T
+enter card to play (A/2-9/J/Q/K) or 'show':
+show
+____________________________________________________________
+Vaibhav called  SHOW  of cards, with a score of 10 points
+Khushi has the least score of 6
+Vaibhav got burst, and got a penalty of 40 points!!
+____________________________________________________________
+result of this round:
+{'Vaibhav': 40, 'Khushi': 6}
+the aggregate score of all rounds so far:
+{'Vaibhav': 53, 'Khushi': 6}
+____________________________________________________________
+Vaibhav got eliminated with a score of 53 points
+Game Over!!!
+Khushi won

@@ -9,48 +9,55 @@ class Suits(enum.Enum):
     Diamond = "♦️"
 
 
-class Value(enum.Enum):
-    Ace = 1
-    Two = 2
-    Three = 3
-    Four = 4
-    Five = 5
-    Six = 6
-    Seven = 7
-    Eight = 8
-    Nine = 9
-    Ten = 10
-    Jack = 10
-    Queen = 10
-    King = 10
+class DecodeRank:
+    def __init__(self, value, code):
+        self.value = value
+        self.code = code
 
 
-card_str_key = {
-    'A': Value.Ace,
-    '2': Value.Two,
-    '3': Value.Three,
-    '4': Value.Four,
-    '5': Value.Five,
-    '6': Value.Six,
-    '7': Value.Seven,
-    '8': Value.Eight,
-    '9': Value.Nine,
-    'T': Value.Ten,
-    'J': Value.Jack,
-    'Q': Value.Queen,
-    'K': Value.King,
+class Rank(enum.Enum):
+    Ace   = DecodeRank(1, 'A')
+    Two   = DecodeRank(2, '2')
+    Three = DecodeRank(3, '3')
+    Four  = DecodeRank(4, '4')
+    Five  = DecodeRank(5, '5')
+    Six   = DecodeRank(6, '6')
+    Seven = DecodeRank(7, '7')
+    Eight = DecodeRank(8, '8')
+    Nine  = DecodeRank(9, '9')
+    Ten   = DecodeRank(10, 'T')
+    Jack  = DecodeRank(11, 'J')
+    Queen = DecodeRank(12, 'Q')
+    King  = DecodeRank(13, 'K')
+
+
+card_str_to_rank = {
+    'A': Rank.Ace,
+    '2': Rank.Two,
+    '3': Rank.Three,
+    '4': Rank.Four,
+    '5': Rank.Five,
+    '6': Rank.Six,
+    '7': Rank.Seven,
+    '8': Rank.Eight,
+    '9': Rank.Nine,
+    'T': Rank.Ten,
+    'J': Rank.Jack,
+    'Q': Rank.Queen,
+    'K': Rank.King,
 }
-
+def get_card_rank(code:str) -> Rank:
+    if code not in card_str_to_rank:
+        raise KeyError(f"invalid code: {code}")
+    return card_str_to_rank[code]
 
 class Card:
-    def __init__(self, suit, value):
+    def __init__(self, suit, rank):
         self.suit = suit
-        self.value = value
+        self.rank = rank
 
     def __str__(self):
-        for key in card_str_key:
-            if self.value == card_str_key[key]:
-                return f"{self.suit.value}{key}"
+        return f"{self.suit.value}{self.rank.value.code}"
 
 
 class Deck:
@@ -59,7 +66,7 @@ class Deck:
 
         if not card_stack:
             for suit in Suits:
-                for num in Value:
+                for num in Rank:
                     self.cards.append(Card(suit, num))
         else:
             for cards in card_stack:

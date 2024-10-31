@@ -10,6 +10,8 @@ class Round:
         self.players: list[Player] = []
         self.total_players = 0
         self.deck = Deck()
+        # noinspection PyTypeChecker
+        self.zero_card: Card = None
         self.card_stack: list[list[Card]] = []
         self.round_over = False
         self.result: dict = {}
@@ -18,6 +20,10 @@ class Round:
         for player in players:
             self.players.append(Player(player))
         self.total_players = len(players)
+
+    def starting_player(self) -> int:
+        self.round_number += 1
+        return self.round_number % self.total_players
 
     def distribute_cards(self, num_of_cards):
         if num_of_cards*len(self.players) > 49:
@@ -29,15 +35,25 @@ class Round:
                 card = self.deck.pop_a_card()
                 self.players[idx].take_card(card)
 
+    def set_zero_card(self):
+        self.zero_card = self.deck.pop_a_card()
+        print(f"zero card is {self.zero_card}")
+        print(f"all {self.zero_card.rank.value.code}s will be considered as value zero(0) for this round")
+
+    def set_starting_card(self):
+        card = self.deck.pop_a_card()
+        self.card_stack = [[card]]
+        print(f"starting card is {card}")
+
     def show_down(self, current_player_idx: int):
         print(const.separation_line)
-        caller_score = self.players[current_player_idx].value_of_cards()
-        print(f"{self.players[current_player_idx].name} called \033[1m SHOW \033[0m of cards, "
+        caller_score = self.players[current_player_idx].value_of_cards(zero_card=self.zero_card)
+        print(f"{self.players[current_player_idx].name} called \033[1mSHOW\033[0m of cards, "
               f"with a score of {caller_score} points")
 
         min_score = caller_score
         for player in self.players:
-            player_score = player.value_of_cards()
+            player_score = player.value_of_cards(zero_card=self.zero_card)
             if player_score < min_score:
                 min_score = player_score
                 min_scorer = (player.name, player_score)
@@ -47,17 +63,15 @@ class Round:
             print(f"{self.players[current_player_idx].name} won the round!!")
             self.result[self.players[current_player_idx].name] = 0
         else:
+            # noinspection PyUnboundLocalVariable
             print(f"{min_scorer[0]} has the least score of {min_scorer[1]}")
             print(f"{self.players[current_player_idx].name} got burst, and got a penalty of 40 points!!")
             self.result[self.players[current_player_idx].name] = 40
 
-    def starting_player(self) -> int:
-        self.round_number += 1
-        return self.round_number % self.total_players
-
     def pick_a_card(self, current_player_idx):
+        cards_count, cards_code = len(self.card_stack[-1]), self.card_stack[-1][0].rank.value.code
         print(f"Since you changed the number, you have to pick card(s): \n"
-              f"1. Last card(s) in the centre {len(self.card_stack[-1])} {self.card_stack[-1][0].value.value}(s), or \n"
+              f"1. Top card(s) in the centre {cards_count} {cards_code}(s), or \n"
               f"2. One card from the top of the Deck")
         while True:
             choice = input()
@@ -87,7 +101,7 @@ class Round:
         while True:
             chance = input("enter card to play (A/2-9/J/Q/K) or \'show\': \n").upper()
 
-            if self.players[current_player_idx].is_valid_play(chance):
+            if self.players[current_player_idx].is_valid_play(chance, zero_card=self.zero_card):
                 break
             else:
                 print("invalid entry! please retry")
@@ -110,21 +124,16 @@ class Round:
 
         print(f"{self.players[current_player_idx].name} played {len(played_cards)} {chance}(s)")
 
-        if played_cards[0].value != self.card_stack[-1][0].value:
+        if played_cards[0].rank != self.card_stack[-1][0].rank:
             self.pick_a_card(current_player_idx)
 
         self.card_stack.append(played_cards)
 
-    def starting_card(self):
-        card = self.deck.pop_a_card()
-        self.card_stack = [[card]]
-        print(f"starting card is {card}")
-
     def controller(self, **kwargs):
         self.deck.shuffle()
         self.distribute_cards(kwargs.get('num_of_cards', 7))
-        # todo: add zero card
-        self.starting_card()
+        self.set_zero_card()
+        self.set_starting_card()
 
         current_player_idx = self.starting_player()
         while True:

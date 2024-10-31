@@ -13,30 +13,40 @@ class Player:
 
     def show_in_hand_cards(self):
         for card in self.cards:
-            print(card, end = ' ')
+            print(card, end=' ')
         print()
 
-    def value_of_cards(self) -> int:
+    def value_of_cards(self, zero_card: cards.Card) -> int:
         total_value = 0
+
         for card in self.cards:
-            total_value += card.value.value
+            if card.rank == zero_card.rank:
+                card_val = 0
+            elif card.rank.value.value >= 10:
+                card_val = 10
+            else:
+                card_val = card.rank.value.value
+
+            total_value += card_val
+
         return total_value
 
+    # noinspection PyShadowingNames
     def take_card(self, card: cards.Card) -> None:
         self.cards.append(card)
-        self.cards.sort(key=lambda card: card.value.value)
+        self.cards.sort(key=lambda card: card.rank.value.value)
 
-    def is_valid_play(self, chance:str):
+    def is_valid_play(self, chance: str, zero_card: cards.Card):
         if chance == '':
             return False
 
         if chance == "SHOW":
-            return self.value_of_cards() <= 10
+            return self.value_of_cards(zero_card=zero_card) <= 10
 
-        card_to_play = cards.card_str_key[chance]
+        card_to_play = cards.get_card_rank(chance)
 
         for card in self.cards:
-            if card.value == card_to_play:
+            if card.rank == card_to_play:
                 return True
 
         return False
@@ -44,18 +54,11 @@ class Player:
     def play_card(self, number: str) -> list[cards.Card]:
         remaining_cards = []
         played_cards = []
-        card_to_play = cards.card_str_key[number]
+        card_to_play = cards.get_card_rank(number)
         for card in self.cards:
-            if card.value == card_to_play:
+            if card.rank == card_to_play:
                 played_cards.append(card)
             else:
                 remaining_cards.append(card)
         self.cards = remaining_cards
         return played_cards
-
-    def show_cards(self) -> int:
-        if self.value_of_cards() <= 10:
-            return value_of_cards()
-        else:
-            print("invalid show!!")
-            return -1

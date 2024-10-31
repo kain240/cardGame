@@ -9,6 +9,7 @@ class Game:
         print(f"starting a game of {points} points...")
         self.round_number = 0
         self.players: list[str] = []
+        # noinspection PyTypeChecker
         self.score_board: ScoreBoard = None
         self.score_limit = points
 

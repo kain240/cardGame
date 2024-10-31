@@ -14,7 +14,7 @@ class ScoreBoard:
             self.board[player] += scores[player]
 
     def publish(self):
-        print("the aggregate score of all rounds so far:")
+        print("the aggregated score of all rounds so far:")
         print(self)
 
     def eliminations(self, players):
