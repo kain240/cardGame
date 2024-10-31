@@ -1,6 +1,6 @@
-from round import Round
-from scoreBoard import ScoreBoard
-import const
+from .round import Round
+from .scoreBoard import ScoreBoard
+from . import const
 
 
 class Game:
